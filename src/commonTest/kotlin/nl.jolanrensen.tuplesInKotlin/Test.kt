@@ -69,6 +69,14 @@ class Test {
         assertEquals(g, tupleOf(tupleOf(1), tupleOf(2L, "")))
 
 
+        val u = "test"
+        val h = u u u u u
+        assertEquals(h, tupleOf(u, u, u))
+
+        val i = { 1 u 'b' } u { "!" u 43+2 }
+        assertEquals(i, tupleOf(tupleOf(1, 'b'), tupleOf("!", 43+2)))
+
+
         val tuple = { 1 u "b" u 5 } u 6 u "test" u { 6.u }
         assertTrue(tuple.first.first == 1)
         assertTrue(tuple.first.second == "b")

@@ -63,7 +63,7 @@ private fun main() {
         val numbers = (1..a).toList()
 //        val stars = numbers.map { "*" }
 
-        println("@OverloadResolutionByLambdaReturnType @JvmName(\"u${a}b\") infix fun <T, ${numbers.joinToString { "T$it" }}> T.u(next: () -> Tuple$a<${numbers.joinToString { "T$it" }}>): Tuple2<T, Tuple$a<${numbers.joinToString { "T$it" }}>> = Tuple2<T, Tuple$a<${numbers.joinToString { "T$it" }}>>(this, next())")
+        println("@OptIn(ExperimentalTypeInference::class) @OverloadResolutionByLambdaReturnType @JvmName(\"u${a}b\") infix fun <T, ${numbers.joinToString { "T$it" }}> T.u(next: () -> Tuple$a<${numbers.joinToString { "T$it" }}>): Tuple2<T, Tuple$a<${numbers.joinToString { "T$it" }}>> = Tuple2<T, Tuple$a<${numbers.joinToString { "T$it" }}>>(this, next())")
 //        println("@JvmName(\"u${a}b\") infix fun <T1, T2: Tuple$a<${stars.joinToString()}>> T1.u(next: () -> T2): Tuple2<T1, T2> = Tuple2<T1, T2>(this, next())")
     }
 
@@ -75,7 +75,7 @@ private fun main() {
         val numbers = (1..a).toList()
         val stars = numbers.map { "*" }
 
-        println("@OverloadResolutionByLambdaReturnType @JvmName(\"u${a}a\") infix fun <${numbers.joinToString { "T$it" }}, T> (() -> Tuple$a<${numbers.joinToString { "T$it" }}>).u(next: T): Tuple2<Tuple$a<${numbers.joinToString { "T$it" }}>, T> = Tuple2<Tuple$a<${numbers.joinToString { "T$it" }}>, T>(this(), next)")
+        println("@OptIn(ExperimentalTypeInference::class) @OverloadResolutionByLambdaReturnType @JvmName(\"u${a}a\") infix fun <${numbers.joinToString { "T$it" }}, T> (() -> Tuple$a<${numbers.joinToString { "T$it" }}>).u(next: T): Tuple2<Tuple$a<${numbers.joinToString { "T$it" }}>, T> = Tuple2<Tuple$a<${numbers.joinToString { "T$it" }}>, T>(this(), next)")
 //        println("@JvmName(\"u${a}a\") infix fun <T1: Tuple$a<${stars.joinToString()}>, T2> (() -> T1).u(next: T2): Tuple2<T1, T2> = Tuple2<T1, T2>(this(), next)")
     }
 
@@ -90,7 +90,7 @@ private fun main() {
             val numbersB = (1..b).toList()
 //            val starsB = numbersB.map { "*" }
 
-            println("@OverloadResolutionByLambdaReturnType @JvmName(\"u${a.toString().padStart(2, '0')}${b.toString().padStart(2, '0')
+            println("@OptIn(ExperimentalTypeInference::class) @OverloadResolutionByLambdaReturnType @JvmName(\"u${a.toString().padStart(2, '0')}${b.toString().padStart(2, '0')
             }d\") infix fun <${numbersA.dropLast(1).joinToString { "TA$it" }}, ${numbersB.joinToString { "TB$it" }}> Tuple${a - 1}<${numbersA.dropLast(1).joinToString { "TA$it" }}>.u(next: () -> Tuple$b<${numbersB.joinToString { "TB$it" }}>): Tuple$a<${numbersA.dropLast(1).joinToString { "TA$it" }}, Tuple$b<${numbersB.joinToString { "TB$it" }}>> = Tuple$a<${numbersA.dropLast(1).joinToString { "TA$it" }}, Tuple$b<${numbersB.joinToString { "TB$it" }}>>(${numbersA.dropLast(1).joinToString { "this.${words[it - 1]}" }}, next())")
         }
     }
@@ -106,7 +106,7 @@ private fun main() {
             val numbersB = (1..b).toList()
 //            val starsB = numbersB.map { "*" }
 
-            println("@OverloadResolutionByLambdaReturnType @JvmName(\"u${a.toString().padStart(2, '0')}${
+            println("@OptIn(ExperimentalTypeInference::class) @OverloadResolutionByLambdaReturnType @JvmName(\"u${a.toString().padStart(2, '0')}${
                 b.toString().padStart(2, '0')
             }c\") infix fun <${numbersA.joinToString { "TA$it" }}, ${numbersB.joinToString { "TB$it" }}> (() -> Tuple$a<${numbersA.joinToString { "TA$it" }}>).u(next: () -> Tuple$b<${numbersB.joinToString { "TB$it" }}>): Tuple2<Tuple$a<${numbersA.joinToString { "TA$it" }}>, Tuple$b<${numbersB.joinToString { "TB$it" }}>> = Tuple2<Tuple$a<${numbersA.joinToString { "TA$it" }}>, Tuple$b<${numbersB.joinToString { "TB$it" }}>>(this(), next())")
         }

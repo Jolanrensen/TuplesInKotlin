@@ -1,8 +1,9 @@
 plugins {
     kotlin("multiplatform") version "1.4.32"
+    `maven-publish`
 }
 
-group = "nl.jolanrensen"
+group = "nl.jolanrensen.tuplesInKotlin"
 version = "1.0-SNAPSHOT"
 
 repositories {
@@ -47,7 +48,6 @@ kotlin {
         isMingwX64 -> mingwX64("native")
         else -> throw GradleException("Host OS is not supported in Kotlin/Native.")
     }
-
     nativeTarget.compilations.all {
         kotlinOptions {
             freeCompilerArgs += listOf(
@@ -57,6 +57,19 @@ kotlin {
         }
     }
 
+    val publicationsFromMainHost =
+        listOf(jvm(), js(), nativeTarget).map { it.name } + "kotlinMultiplatform"
+
+    publishing {
+        publications {
+            matching { it.name in publicationsFromMainHost }.all {
+                val targetPublication = this@all
+                tasks.withType<AbstractPublishToMaven>()
+                    .matching { it.publication == targetPublication }
+                    .configureEach { onlyIf { findProperty("isMainHost") == "true" } }
+            }
+        }
+    }
 
     sourceSets {
         val commonMain by getting {
