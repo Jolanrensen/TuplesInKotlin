@@ -36,11 +36,11 @@ kotlin {
                 )
             }
         }
-        browser {
-            commonWebpackConfig {
-                cssSupport.enabled = true
-            }
-        }
+//        browser {
+//            commonWebpackConfig {
+//                cssSupport.enabled = true
+//            }
+//        }
     }
     val hostOs = System.getProperty("os.name")
     val isMingwX64 = hostOs.startsWith("Windows")
