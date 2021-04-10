@@ -40,11 +40,11 @@ kotlin {
                 )
             }
         }
-        browser {
-            commonWebpackConfig {
-                cssSupport.enabled = true
-            }
-        }
+     //   browser {
+      //      commonWebpackConfig {
+      //          cssSupport.enabled = true
+     //       }
+     //   }
         nodejs()
     }
     val hostOs = System.getProperty("os.name")
