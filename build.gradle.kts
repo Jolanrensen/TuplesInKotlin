@@ -12,6 +12,10 @@ repositories {
     mavenCentral()
 }
 
+val javadocJar by tasks.creating(Jar::class) {
+    archiveClassifier.value("javadoc")
+}
+
 kotlin {
     jvm {
         compilations.all {
@@ -36,11 +40,12 @@ kotlin {
                 )
             }
         }
-//        browser {
-//            commonWebpackConfig {
-//                cssSupport.enabled = true
-//            }
-//        }
+        browser {
+            commonWebpackConfig {
+                cssSupport.enabled = true
+            }
+        }
+        nodejs()
     }
     val hostOs = System.getProperty("os.name")
     val isMingwX64 = hostOs.startsWith("Windows")
@@ -63,14 +68,32 @@ kotlin {
         listOf(jvm(), js(), nativeTarget).map { it.name } + "kotlinMultiplatform"
 
     publishing {
-        publications {
-            matching { it.name in publicationsFromMainHost }.all {
-                val targetPublication = this@all
-                tasks.withType<AbstractPublishToMaven>()
-                    .matching { it.publication == targetPublication }
-                    .configureEach { onlyIf { findProperty("isMainHost") == "true" } }
+        publications.all {
+            this as MavenPublication
+
+            println(name)
+            artifact(javadocJar)
+
+            pom {
+                name.set(group as String)
+
             }
         }
+//        publications {
+//            create<MavenPublication>("maven") {
+//                groupId = "nl.jolanrensen"
+//                artifactId = "tuplesInKotlin"
+//                version = "1.0-SNAPSHOT"
+//
+//                from(components["kotlin"])
+//            }
+//            matching { it.name in publicationsFromMainHost }.all {
+//                val targetPublication = this@all
+//                tasks.withType<AbstractPublishToMaven>()
+//                    .matching { it.publication == targetPublication }
+//                    .configureEach { onlyIf { findProperty("isMainHost") == "true" } }
+//            }
+//        }
     }
 
     sourceSets {
