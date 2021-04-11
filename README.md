@@ -4,7 +4,9 @@ This repo contains a bunch of files that provide extensions to make Tuples easie
 For use with Scala or Apache Spark, see [ScalaTuplesInKotlin](https://github.com/Jolanrensen/ScalaTuplesInKotlin).
 
 # How to install
-TODO
+Alpha 0.0.1: [![](https://jitpack.io/v/Jolanrensen/TuplesInKotlin.svg)](https://jitpack.io/#Jolanrensen/TuplesInKotlin/alpha-0.0.1)
+
+Note: There are some performance issues in building and using the library at the moment due to the sheer number of functions. This hopefully improve in later versions!
 
 # Wrapping Kotlin Pair and Triple
 The library adds type aliases for Kotlin's `Pair` and `Triple` as `Tuple2` and `Tuple3` respectively.
